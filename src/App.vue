@@ -1,5 +1,15 @@
 <script setup>
 
+import { useTodoStore } from './stores/todo';
+import { onMounted } from 'vue';
+
+const TodoStore = useTodoStore();
+
+
+onMounted(() =>{
+  TodoStore.getAllTodos();
+})
+
 </script>
 
 <template>
@@ -45,7 +55,7 @@
 
             <ul class="list-group">
 
-              <li class="list-group-item d-flex justify-content-between align-items-center">List Item
+              <li v-for="todo in TodoStore.todos" :key="todo.id" class="list-group-item d-flex justify-content-between align-items-center"><span :class="todo.completed ? 'text-decoration-line-through': ''">{{ todo.title }}</span>
 
 
               <a href="" class="btn">
